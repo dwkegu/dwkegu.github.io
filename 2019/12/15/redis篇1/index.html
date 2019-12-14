@@ -8,17 +8,17 @@
   
     <meta name="keywords" content="machine learning, deep learning, data mining, NLP">
   
-  <meta name="description" content="redis基础介绍主要介绍redis原理基础和架构">
+  <meta name="description" content="redis基础介绍主要介绍redis原理基础和架构。 Redis是一款C语言开发的k-V pair的高性能内存数据库。Redis的特点主要是速度快，存在于内存中，也可以持久化，支持多种数据类型，支持多种语言的客户端，也支持发布订阅、Lua脚本、事务、Pipeline等功能。 这里我们罗列一下redis性能数据：   读写速度 千万次/秒 单线程网络请求（可以开启多线程）   持久化方式如下：  R">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis篇1">
 <meta property="og:url" content="http://dwkegu.github.io/2019/12/15/redis篇1/index.html">
 <meta property="og:site_name" content="DayDream_Blog">
-<meta property="og:description" content="redis基础介绍主要介绍redis原理基础和架构">
+<meta property="og:description" content="redis基础介绍主要介绍redis原理基础和架构。 Redis是一款C语言开发的k-V pair的高性能内存数据库。Redis的特点主要是速度快，存在于内存中，也可以持久化，支持多种数据类型，支持多种语言的客户端，也支持发布订阅、Lua脚本、事务、Pipeline等功能。 这里我们罗列一下redis性能数据：   读写速度 千万次/秒 单线程网络请求（可以开启多线程）   持久化方式如下：  R">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-12-14T16:09:00.794Z">
+<meta property="og:updated_time" content="2019-12-14T16:29:27.141Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis篇1">
-<meta name="twitter:description" content="redis基础介绍主要介绍redis原理基础和架构">
+<meta name="twitter:description" content="redis基础介绍主要介绍redis原理基础和架构。 Redis是一款C语言开发的k-V pair的高性能内存数据库。Redis的特点主要是速度快，存在于内存中，也可以持久化，支持多种数据类型，支持多种语言的客户端，也支持发布订阅、Lua脚本、事务、Pipeline等功能。 这里我们罗列一下redis性能数据：   读写速度 千万次/秒 单线程网络请求（可以开启多线程）   持久化方式如下：  R">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -138,11 +138,23 @@
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <h1 id="redis基础介绍"><a href="#redis基础介绍" class="headerlink" title="redis基础介绍"></a>redis基础介绍</h1><p>主要介绍redis原理基础和架构</p>
+            <h1 id="redis基础介绍"><a href="#redis基础介绍" class="headerlink" title="redis基础介绍"></a>redis基础介绍</h1><p>主要介绍redis原理基础和架构。 Redis是一款C语言开发的k-V pair的高性能内存数据库。Redis的特点主要是速度快，存在于内存中，也可以持久化，支持多种数据类型，支持多种语言的客户端，也支持发布订阅、Lua脚本、事务、Pipeline等功能。</p>
+<p>这里我们罗列一下redis性能数据：</p>
+<blockquote>
+<ul>
+<li>读写速度 千万次/秒</li>
+<li>单线程网络请求（可以开启多线程）</li>
+</ul>
+</blockquote>
+<p>持久化方式如下：</p>
+<ul>
+<li>RDB: 指定时间间隔内异步将内存数据生成文件数据写到磁盘</li>
+<li>AOF: 将每次的操作数据都写到AOF文件，然后配置AOF文件写磁盘的规则。</li>
+</ul>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2019年12月15日 00:09</p>
+        <p>最后更新： 2019年12月15日 00:29</p>
         <p>原始链接： <a class="post-url" href="/2019/12/15/redis篇1/" title="redis篇1">http://dwkegu.github.io/2019/12/15/redis篇1/</a></p>
         <footer>
             <a href="http://dwkegu.github.io">
@@ -259,6 +271,16 @@
     
 
 <nav id="article-nav">
+  
+    <a href="/2019/12/15/自然语言处理之分词篇/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          自然语言处理之分词篇
+        
+      </span>
+    </a>
   
   
     <a href="/2019/09/11/traffic-prediction/" id="article-nav-older" class="article-nav-link-wrap">
