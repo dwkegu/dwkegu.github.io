@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="DayDream_Blog">
 <meta property="og:description" content="redis基础介绍主要介绍redis原理基础和架构。 Redis是一款C语言开发的key-Struct pair的高性能内存数据库。Redis的特点主要是速度快，存在于内存中，也可以持久化，支持多种数据类型，支持多种语言的客户端，也支持发布订阅、Lua脚本、事务、Pipeline等功能。 这里我们罗列一下redis性能数据：   读写速度 千万次/秒 单线程网络请求（可以开启多线程）   持久化方">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-12-14T17:19:45.881Z">
+<meta property="og:updated_time" content="2019-12-16T16:36:11.810Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis篇1">
 <meta name="twitter:description" content="redis基础介绍主要介绍redis原理基础和架构。 Redis是一款C语言开发的key-Struct pair的高性能内存数据库。Redis的特点主要是速度快，存在于内存中，也可以持久化，支持多种数据类型，支持多种语言的客户端，也支持发布订阅、Lua脚本、事务、Pipeline等功能。 这里我们罗列一下redis性能数据：   读写速度 千万次/秒 单线程网络请求（可以开启多线程）   持久化方">
@@ -168,16 +168,23 @@
 <li>主数据库出现故障时，可以通过投票机制在从数据库中选出新的主数据库。</li>
 </ul>
 <p>Redis 3.0引入了集群支持。 </p>
-<h1 id="Redis-数据结构详细介绍"><a href="#Redis-数据结构详细介绍" class="headerlink" title="Redis 数据结构详细介绍"></a>Redis 数据结构详细介绍</h1><p>Redis的Key 类型： Redis的Key是二进制安全的，也就是说可以用任意的二进制序列作为Key，甚至可以是空字符串。对于Key有少数注意事项：</p>
+<h1 id="Redis-数据结构详细介绍"><a href="#Redis-数据结构详细介绍" class="headerlink" title="Redis 数据结构详细介绍"></a>Redis 数据结构详细介绍</h1><p><strong>Redis的Key 类型</strong>： Redis的Key是二进制安全的，也就是说可以用任意的二进制序列作为Key，甚至可以是空字符串。对于Key有少数注意事项：</p>
 <blockquote>
 <ul>
-<li>Key太长是不推荐的</li>
+<li>Key太长是不推荐的，原因是因为不仅占内存过大，而且在查找的时候进行key比较会比较耗时，当key比较长的时候，一个比较好的方案是对它进行hash（例如SHA1)。</li>
+<li>太短的key也不推荐，有时候为了key过短，没有标明它的含义，虽然它占用跟少的内存，但可读性不佳，因此在设计的时候，我们需要在可读性和内存消耗上取得平衡。</li>
+<li>key命名的时候尽量按照一定的模式 例如 data_type:id，甚至可以更多 data_type: id:target_type</li>
 </ul>
 </blockquote>
+<p><strong>Redis String类型</strong>: redis最常见的数据类型，并且唯一存在于分布式系统中的数据类型。Redis中的value可以是任意类型的string（二进制类型）,也就是说你可以任意格式的数据转合成二进制的string然后存放到Redis里面，但是单个value文件大小不能超过512MB。<br>虽然string类型是基础类型，但是仍然支持一些基础的操作，例如(在redis-cli中）：</p>
+<blockquote>
+<p>&gt;set counter 100<br><em>OK</em><br>&gt; incr counter<br>(integer) 101<br>&gt; incrby counter 50<br>(integer) 151</p>
+</blockquote>
+<p><a href="https://redis.io/commands/incr" target="_blank" rel="noopener">incr</a>命令会自动将string类型的value转换成integer类型，然后加1，然后加整形结果转换成字符串，更新原来的value。类似的命令还有<a href="https://redis.io/commands/incrby" target="_blank" rel="noopener">INCBY</a>， <a href="https://redis.io/commands/decr" target="_blank" rel="noopener">DECR</a>， <a href="https://redis.io/commands/decrby" target="_blank" rel="noopener">DECRBY</a>。注意，这些命令的操作都是原子的，不存在脏读和幻度，重复写等问题。<br>对于相同时搜索多个key或者设置多个key的情况，可以使用<a href="https://redis.io/commands/mset" target="_blank" rel="noopener">mset</a>, <a href="https://redis.io/commands/mget" target="_blank" rel="noopener">mget</a>命令。</p>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2019年12月15日 01:19</p>
+        <p>最后更新： 2019年12月17日 00:36</p>
         <p>原始链接： <a class="post-url" href="/2019/12/15/redis篇1/" title="redis篇1">http://dwkegu.github.io/2019/12/15/redis篇1/</a></p>
         <footer>
             <a href="http://dwkegu.github.io">
