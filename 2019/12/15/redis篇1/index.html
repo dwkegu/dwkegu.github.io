@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="DayDream_Blog">
 <meta property="og:description" content="redis基础介绍主要介绍redis原理基础和架构。 Redis是一款C语言开发的key-Struct pair的高性能内存数据库。Redis的特点主要是速度快，存在于内存中，也可以持久化，支持多种数据类型，支持多种语言的客户端，也支持发布订阅、Lua脚本、事务、Pipeline等功能。 这里我们罗列一下redis性能数据：   读写速度 千万次/秒 单线程网络请求（可以开启多线程）   持久化方">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-12-16T16:36:11.810Z">
+<meta property="og:updated_time" content="2019-12-16T16:45:00.003Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis篇1">
 <meta name="twitter:description" content="redis基础介绍主要介绍redis原理基础和架构。 Redis是一款C语言开发的key-Struct pair的高性能内存数据库。Redis的特点主要是速度快，存在于内存中，也可以持久化，支持多种数据类型，支持多种语言的客户端，也支持发布订阅、Lua脚本、事务、Pipeline等功能。 这里我们罗列一下redis性能数据：   读写速度 千万次/秒 单线程网络请求（可以开启多线程）   持久化方">
@@ -181,10 +181,19 @@
 <p>&gt;set counter 100<br><em>OK</em><br>&gt; incr counter<br>(integer) 101<br>&gt; incrby counter 50<br>(integer) 151</p>
 </blockquote>
 <p><a href="https://redis.io/commands/incr" target="_blank" rel="noopener">incr</a>命令会自动将string类型的value转换成integer类型，然后加1，然后加整形结果转换成字符串，更新原来的value。类似的命令还有<a href="https://redis.io/commands/incrby" target="_blank" rel="noopener">INCBY</a>， <a href="https://redis.io/commands/decr" target="_blank" rel="noopener">DECR</a>， <a href="https://redis.io/commands/decrby" target="_blank" rel="noopener">DECRBY</a>。注意，这些命令的操作都是原子的，不存在脏读和幻度，重复写等问题。<br>对于相同时搜索多个key或者设置多个key的情况，可以使用<a href="https://redis.io/commands/mset" target="_blank" rel="noopener">mset</a>, <a href="https://redis.io/commands/mget" target="_blank" rel="noopener">mget</a>命令。</p>
+<p>常用命令：</p>
+<ul>
+<li>set (mset)</li>
+<li>get (mget)</li>
+<li>exist</li>
+<li>del</li>
+<li>type</li>
+</ul>
+<p><strong>Redis周期</strong>：在redis中可以为每个key指定一个生存时间，在该周期内该key存在，超过该时间该key将会被自动删除。</p>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2019年12月17日 00:36</p>
+        <p>最后更新： 2019年12月17日 00:45</p>
         <p>原始链接： <a class="post-url" href="/2019/12/15/redis篇1/" title="redis篇1">http://dwkegu.github.io/2019/12/15/redis篇1/</a></p>
         <footer>
             <a href="http://dwkegu.github.io">
