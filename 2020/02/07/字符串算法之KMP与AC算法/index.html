@@ -3,22 +3,24 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>traffic prediction | DayDream_Blog</title>
+  <title>字符串算法之KMP与AC算法 | DayDream_Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="machine learning, deep learning, data mining, NLP">
   
-  <meta name="description" content="机器学习，数据挖掘，NLP技术博客">
+  <meta name="description" content="1. 介绍在字符串匹配算法中，通常分为单模式匹配和多模式匹配。常见的字符串匹配常见为单模式匹配，例如，搜索某个长串中是否存在某个子串。这种场景下$O(n)$时间效率内解决的算法是KMP算法。在多模式匹配的场景下，KMP算法并不能在线性时间内解决这个问题。需要多次遍历长串，才能实现每个模式串的匹配。AC算法就是为了解决在线性时间内进行多模式字符串匹配的问题，其时间复杂度为$O(n)$。 2. KMP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="traffic prediction">
-<meta property="og:url" content="http://dwkegu.github.io/2019/09/11/traffic-prediction/index.html">
+<meta property="og:title" content="字符串算法之KMP与AC算法">
+<meta property="og:url" content="http://dwkegu.github.io/2020/02/07/字符串算法之KMP与AC算法/index.html">
 <meta property="og:site_name" content="DayDream_Blog">
-<meta property="og:description" content="机器学习，数据挖掘，NLP技术博客">
+<meta property="og:description" content="1. 介绍在字符串匹配算法中，通常分为单模式匹配和多模式匹配。常见的字符串匹配常见为单模式匹配，例如，搜索某个长串中是否存在某个子串。这种场景下$O(n)$时间效率内解决的算法是KMP算法。在多模式匹配的场景下，KMP算法并不能在线性时间内解决这个问题。需要多次遍历长串，才能实现每个模式串的匹配。AC算法就是为了解决在线性时间内进行多模式字符串匹配的问题，其时间复杂度为$O(n)$。 2. KMP">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-09-10T17:08:11.500Z">
+<meta property="og:image" content="http://dwkegu.github.io/2020/02/07/字符串算法之KMP与AC算法/images/KMP_ex1.jpg">
+<meta property="og:updated_time" content="2020-02-09T14:01:11.909Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="traffic prediction">
-<meta name="twitter:description" content="机器学习，数据挖掘，NLP技术博客">
+<meta name="twitter:title" content="字符串算法之KMP与AC算法">
+<meta name="twitter:description" content="1. 介绍在字符串匹配算法中，通常分为单模式匹配和多模式匹配。常见的字符串匹配常见为单模式匹配，例如，搜索某个长串中是否存在某个子串。这种场景下$O(n)$时间效率内解决的算法是KMP算法。在多模式匹配的场景下，KMP算法并不能在线性时间内解决这个问题。需要多次遍历长串，才能实现每个模式串的匹配。AC算法就是为了解决在线性时间内进行多模式字符串匹配的问题，其时间复杂度为$O(n)$。 2. KMP">
+<meta name="twitter:image" content="http://dwkegu.github.io/2020/02/07/字符串算法之KMP与AC算法/images/KMP_ex1.jpg">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -109,20 +111,20 @@
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-traffic-prediction" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-字符串算法之KMP与AC算法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      traffic prediction
+      字符串算法之KMP与AC算法
     </h1>
     <div class="post-title-bar">
       <ul>
           
         <li>
-          <i class="fa fa-calendar"></i>  2019-09-11
+          <i class="fa fa-calendar"></i>  2020-02-07
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -138,11 +140,17 @@
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            
+            <h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h2><p>在字符串匹配算法中，通常分为单模式匹配和多模式匹配。常见的字符串匹配常见为单模式匹配，例如，搜索某个长串中是否存在某个子串。这种场景下$O(n)$时间效率内解决的算法是<a href="https://zh.wikipedia.org/wiki/%E5%85%8B%E5%8A%AA%E6%96%AF-%E8%8E%AB%E9%87%8C%E6%96%AF-%E6%99%AE%E6%8B%89%E7%89%B9%E7%AE%97%E6%B3%95" target="_blank" rel="noopener"><strong>KMP算法</strong></a>。在多模式匹配的场景下，KMP算法并不能在线性时间内解决这个问题。需要多次遍历长串，才能实现每个模式串的匹配。<a href="https://en.wikipedia.org/wiki/Aho%E2%80%93Corasick_algorithm" target="_blank" rel="noopener"><strong>AC算法</strong></a>就是为了解决在线性时间内进行多模式字符串匹配的问题，其时间复杂度为$O(n)$。</p>
+<h2 id="2-KMP算法"><a href="#2-KMP算法" class="headerlink" title="2. KMP算法"></a>2. KMP算法</h2><p>在KMP算法之前，单模式字符串匹配需要多次扫描源字符串。为了在每次匹配失败的时候不需要重新匹配，KMP算法使用了一个小技巧，对模式串不同长度的子串寻找该子串对应的最长相同前后缀。例如，源字符串$s$和模式串$p$，当匹配到模式串$j$位置时，我们发现源字符串和模式串对应位置不相同，这时候简单的做法是重新从源字符串的上一次开始位置的下一个位置与模式串进行对比，但是如果我们能发现模式串到$j$位置之前的字符串存在$k$个前缀字符$p[:k]$与k个后缀字符$p[j-k:j]$相同，这时候我们可以直接从模式串的第$k+1$个进行匹配。具体见下图：<img src="images/KMP_ex1.jpg" alt="KMP算法技巧说明"></p>
+<p>提前求出模式串的每个每个位置的最长相同前缀和后缀，在匹配失败的时候能够使得源字符串遍历的位置不变，快速确定模式串重新匹配的位置。该算法的关键在生成模式串的重新匹配位置数组。具体算法如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化next数组为[-1, 0, ....]</span></span><br><span class="line"><span class="keyword">char</span> *p = <span class="string">""</span>;</span><br><span class="line"><span class="keyword">int</span> pLen = <span class="built_in">strlen</span>(p);</span><br><span class="line"><span class="keyword">int</span> *next = <span class="keyword">new</span> <span class="keyword">int</span>[pLen];</span><br><span class="line">next[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">next[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> tmp;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; pLen; i++)&#123;</span><br><span class="line">    tmp = i;</span><br><span class="line">    next[i] = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//当前位置的最长前后缀为之前的最长前缀+1,如果改签后缀后一个字符等于第当前位置字符，否则一直判断到不存在就重新匹配为0;</span></span><br><span class="line">    <span class="keyword">while</span>(tmp &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(p[next[i<span class="number">-1</span>]] == p[i<span class="number">-1</span>])&#123;</span><br><span class="line">            next[i] = next[i<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            tmp = next[i - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-AC算法"><a href="#3-AC算法" class="headerlink" title="3. AC算法"></a>3. AC算法</h2><p>AC算法主要是解决线性时间内的多模式字符串匹配问题。</p>
+
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2019年09月11日 01:08</p>
-        <p>原始链接： <a class="post-url" href="/2019/09/11/traffic-prediction/" title="traffic prediction">http://dwkegu.github.io/2019/09/11/traffic-prediction/</a></p>
+        <p>最后更新： 2020年02月09日 22:01</p>
+        <p>原始链接： <a class="post-url" href="/2020/02/07/字符串算法之KMP与AC算法/" title="字符串算法之KMP与AC算法">http://dwkegu.github.io/2020/02/07/字符串算法之KMP与AC算法/</a></p>
         <footer>
             <a href="http://dwkegu.github.io">
                 <img src="/images/logo.png" alt="Riverspeng">
@@ -199,7 +207,7 @@
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://dwkegu.github.io/2019/09/11/traffic-prediction/&title=《traffic prediction》 — DayDream_Blog&pic=http://dwkegu.github.ioimages/logo.png" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://dwkegu.github.io/2020/02/07/字符串算法之KMP与AC算法/&title=《字符串算法之KMP与AC算法》 — DayDream_Blog&pic=http://dwkegu.github.ioimages/logo.png" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -209,22 +217,22 @@
             </a>
           </li>
           <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://dwkegu.github.io/2019/09/11/traffic-prediction/&title=《traffic prediction》 — DayDream_Blog&source=机器学习，数据挖掘，NLP技术博客" data-title="QQ">
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://dwkegu.github.io/2020/02/07/字符串算法之KMP与AC算法/&title=《字符串算法之KMP与AC算法》 — DayDream_Blog&source=机器学习，数据挖掘，NLP技术博客" data-title="QQ">
               <i class="fa fa-qq"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://dwkegu.github.io/2019/09/11/traffic-prediction/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://dwkegu.github.io/2020/02/07/字符串算法之KMP与AC算法/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《traffic prediction》 — DayDream_Blog&url=http://dwkegu.github.io/2019/09/11/traffic-prediction/&via=http://dwkegu.github.io" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《字符串算法之KMP与AC算法》 — DayDream_Blog&url=http://dwkegu.github.io/2020/02/07/字符串算法之KMP与AC算法/&via=http://dwkegu.github.io" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://dwkegu.github.io/2019/09/11/traffic-prediction/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://dwkegu.github.io/2020/02/07/字符串算法之KMP与AC算法/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -234,7 +242,7 @@
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://dwkegu.github.io/2019/09/11/traffic-prediction/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://dwkegu.github.io/2020/02/07/字符串算法之KMP与AC算法/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -250,22 +258,18 @@
 </article>
 
 
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-介绍"><span class="post-toc-text">1. 介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-KMP算法"><span class="post-toc-text">2. KMP算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-AC算法"><span class="post-toc-text">3. AC算法</span></a></li></ol>
+        </nav>
+    </aside>
+    
 
 <nav id="article-nav">
   
-    <a href="/2019/12/15/redis篇1/" id="article-nav-newer" class="article-nav-link-wrap">
-
-      <span class="article-nav-title">
-        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-        
-          redis篇1
-        
-      </span>
-    </a>
   
-  
-    <a href="/2019/09/10/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">Hello World</span>
+    <a href="/2019/12/15/数据挖掘之数据清洗/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">数据挖掘之数据清洗</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
   
